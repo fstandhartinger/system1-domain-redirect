@@ -28,7 +28,7 @@ const server = createServer((request, response) => {
   const host = rawHost.toLowerCase().replace(/:\d+$/, "");
   const requestTarget = request.url ?? "/";
 
-  if ((host === "localhost" || host === serviceHost) && request.method === "GET" && requestTarget === "/healthz") {
+  if ((host === "localhost" || host === "127.0.0.1" || host === "[::1]" || host === serviceHost) && request.method === "GET" && requestTarget === "/healthz") {
     response.writeHead(204, { "Cache-Control": "no-store" });
     response.end();
     return;
@@ -59,4 +59,4 @@ const server = createServer((request, response) => {
   response.end();
 });
 
-server.listen(3000, "0.0.0.0");
+server.listen(3000, "::");
