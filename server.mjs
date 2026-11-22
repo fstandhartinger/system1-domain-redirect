@@ -50,7 +50,7 @@ const server = createServer((request, response) => {
   const queryIndex = requestTarget.indexOf("?");
   const existingQuery = queryIndex >= 0 && requestTarget.length > queryIndex + 1;
   const separator = existingQuery ? "&" : queryIndex >= 0 ? "" : "?";
-  const location = `${destination}${requestTarget}${separator}utm_source=${encodeURIComponent(sourceDomain)}`;
+  const location = `${destination}${requestTarget}${separator}utm_source=${encodeURIComponent(sourceDomain)}&utm_medium=redirect&utm_campaign=legacy-domain`;
   response.writeHead(301, {
     Location: location,
     "Cache-Control": "public, max-age=3600",
